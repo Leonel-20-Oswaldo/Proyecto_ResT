@@ -52,7 +52,7 @@ export default function navigation() {
         <Tab.Screen
           name="toprestaurants"
           component={TopRestaurantsStack}
-          options={{ title: "principales restaurantes" }}
+          options={{ title: "Principales restaurantes" }}
         />
       </Tab.Navigator>
     </NavigationContainer>
