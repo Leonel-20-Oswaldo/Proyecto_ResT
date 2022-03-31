@@ -1,10 +1,33 @@
 import React from "react";
-import { View, Text } from 'react-native'
+import { StyleSheet, View, Text, ScrollView, Image } from 'react-native'
+import { Button } from "react-native-elements";
 
 export default function UserGuest(){
     return(
-        <View>
-            <Text>UserGuest</Text>
-        </View>
+        <ScrollView style={StyleSheet.container}>
+            <Image
+                style={styles.stretch}
+                source={require('../../../assets/img/user-guest.jpg')}
+            />
+            <Text style={styles.title}>Ingresa a tu perfil</Text>
+        </ScrollView>
     )
 }
+
+const styles = StyleSheet.create({
+    container:{
+        paddingTop: 10
+    },
+    stretch:{
+        width:'100%',
+        height: 300,
+        resizeMode: 'contain',
+        marginBotton: 40
+    },
+    title:{
+        fontWeight:'bold',
+        fontSize: 19,
+        marginBottom: 10,
+        textAlign:'center'
+    }
+})
