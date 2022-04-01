@@ -10,6 +10,7 @@ export default function UserGuest(){
                 source={require('../../../assets/img/user-guest.jpg')}
             />
             <Text style={styles.title}>Ingresa a tu perfil</Text>
+            <Text style={styles.description}>Busca y visualiza las mejores opciones en restaurantes de tu cuidad, no olvides rankear tus favoritos</Text>
         </ScrollView>
     )
 }
@@ -29,5 +30,10 @@ const styles = StyleSheet.create({
         fontSize: 19,
         marginBottom: 10,
         textAlign:'center'
+    },
+    description:{
+        marginBottom: 20,
+        textAlign: 'center'
+
     }
 })
