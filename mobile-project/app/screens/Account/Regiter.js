@@ -9,7 +9,7 @@ export default function Register(){
         <KeyboardAwareScrollView>
             <Image source={require('../../../assets/img/restaurant.png')} resizeMode='contain' style={styles.logo}
                 />
-             <View style ={Styles.viewForms}>
+             <View style ={styles.viewForms}>
                  <RegisterForm/>
             </View>
         </KeyboardAwareScrollView>
