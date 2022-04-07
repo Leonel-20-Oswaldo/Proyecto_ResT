@@ -1,18 +1,22 @@
-import React from "react";
+import React, {useRef} from "react";
 import { StyleSheet, View, ScrollView, Text, Image } from "react-native";
 import { Divider } from 'react-native-elements'
 import { useNavigation } from "@react-navigation/native";
+import LoginForm from "../../components/Account/LoginForm";
+import Toast from "react-native-toast-message";
 
 export default function Login(){
+    const toastRef = useRef()
     return(
         <ScrollView>
             <Image source={require('../../../assets/img/restaurant.jpg')} resizeMode='contain' style={styles.logo}
             />
             <View style={styles.viewContainer}>
-                <Text>Login From</Text>
+                <LoginForm toastRef={toastRef}/>
                 <CreateAccount/>     
             </View>
             <Divider style={styles.Divider}/>
+            <Toast ref={toastRef}/>
         </ScrollView>
     )
 }
