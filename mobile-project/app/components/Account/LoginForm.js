@@ -25,7 +25,7 @@ export default function LoginForm(props){
                 type: 'error',
                 position: 'top',
                 text1: 'Notificación',
-                text2: 'El email no es correcto',
+                text2: 'El email no es correcto o la contraseña',
                 visibilityTime: 3000,
             });
         }else{
@@ -72,7 +72,7 @@ export default function LoginForm(props){
             />
            
             <Button
-                title='Inicia sesion'
+                title='Inicia sesión'
                 containerStyle={styles.btnContainerLogin}
                 buttonStyle={styles.btnLogin}
                 onPress={onSubmint}
