@@ -9,7 +9,7 @@ export default function Register(){
     const toastRef = useRef()
     return(
         <KeyboardAwareScrollView>
-            <Image source={require('../../../assets/img/restaurant.png')} resizeMode='contain' style={styles.logo}
+            <Image source={require('../../../assets/img/restaurant.jpg')} resizeMode='contain' style={styles.logo}
                 />
              <View style ={styles.viewForms}>
                  <RegisterForm toastRef={toastRef}/>
