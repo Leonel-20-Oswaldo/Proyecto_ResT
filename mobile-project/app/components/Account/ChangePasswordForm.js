@@ -47,7 +47,7 @@ const ChangePasswordForm = ({
   return (
     <View style={styles.view}>
       <InputText
-        placeholder="current password"
+        placeholder="Contraseña actual"
         icon={{
           type: "lock",
           name: "lock",
@@ -58,7 +58,7 @@ const ChangePasswordForm = ({
         error={error}
       />
        <InputText
-        placeholder="New password"
+        placeholder="Nueva contraseña"
         icon={{
           type: "lock",
           name: "lock",
@@ -70,7 +70,7 @@ const ChangePasswordForm = ({
       />
     
 
-      <ButtonModal text="Change Password" isLoadig={isLoadig} onPress={onSubmit} />
+      <ButtonModal text="Cambia la contraseña" isLoadig={isLoadig} onPress={onSubmit} />
     </View>
   );
 };
