@@ -4,44 +4,82 @@ import firebase from "firebase";
 import InputText from "../inputs/InputText";
 import ButtonModal from "../buttons/ButtonModal";
 
-const ChangePasswordForm = ({
+const ChangePassword = ({
   displayPassword,
   setReloadUserInfo,
-  setShowModal
+  setShowModal,
 }) => {
   const [newPassword, setNewPassword] = useState(null);
-  const [error, setError] = useState(null);
+  const [currentPassword, setCurrentPassword] = useState(null);
+  const [error, setError] = useState({});
   const [isLoadig, setIsLoading] = useState(false);
 
-  const onSubmit = () => {
-    setError(null);
+  const onSubmit = async () => {
+    setIsLoading(true);
+    setError({});
 
     if (!newPassword) {
-      setError("El email no puede ser vacío");
+      setError({
+        ...error,
+        newPassword: "La nueva contraseña no es valida",
+      });
+      return;
     }
-     
-    if (displayPassword === newPassword) {
-      setError("El email no puede ser igual al actual");
+    if (!currentPassword) {
+      setError({
+        ...error,
+        currentPassword: "La nueva contraseña no es valida",
+      });
       return;
     }
 
-    setIsLoading(true);
-    const user = firebase.auth().currentUser;
-    user
-    .updatePassword(newPassword)
-    .then(() => {
-      firebase.auth().currentUser.reload()
-
-      setIsLoading(false);
-      setReloadUserInfo(true);
-      setShowModal(false);
-    })
-    .catch((e) => {
-      if(e.code =="auth/requires-recent-login"){
-        setError("password");
-        setIsLoading(false);
-      }
+    if (displayPassword === newPassword) {
+      setError({
+        newPassword: "las contraseñas no pueden ser iguales",
+        currentPassword: "las contraseñas no pueden ser iguales",
       });
+      return;
+    }
+
+    // verify password
+    let user = firebase.auth().currentUser;
+    let email = user.email;
+
+    let credential = firebase.auth.EmailAuthProvider.credential(
+      email,
+      currentPassword
+    );
+    const validate = await user
+      .reauthenticateWithCredential(credential)
+      .then((response) => true)
+      .catch((e) => {
+        if (e?.code == "auth/wrong-password") {
+          setError({
+            ...error,
+            currentPassword: "la contraseña no es valida",
+          });
+        }
+        return false;
+      });
+
+    if (!(await validate)) {
+      setIsLoading(false);
+      return;
+    }
+
+    await user
+      .updatePassword(newPassword)
+      .then(() => {
+        setIsLoading(false);
+        setReloadUserInfo(true);
+        setShowModal(false);
+      })
+      .catch((e) => {
+        if (e.code == "auth/requires-recent-login") {
+          setIsLoading(false);
+        }
+      });
+    setIsLoading(false);
   };
 
   return (
@@ -53,29 +91,34 @@ const ChangePasswordForm = ({
           name: "lock",
           color: "#c2c2c2",
         }}
-        value={newPassword || ""}
-        onChange={(e) => setNewPassword(e.nativeEvent.text)}
-        error={error}
+        is_secure
+        value={currentPassword || ""}
+        onChange={(e) => setCurrentPassword(e.nativeEvent.text)}
+        error={error?.currentPassword}
       />
-       <InputText
+      <InputText
         placeholder="Nueva contraseña"
         icon={{
           type: "lock",
           name: "lock",
           color: "#c2c2c2",
         }}
+        is_secure
         value={newPassword || ""}
         onChange={(e) => setNewPassword(e.nativeEvent.text)}
-        error={error}
+        error={error?.newPassword}
       />
-    
 
-      <ButtonModal text="Cambia la contraseña" isLoadig={isLoadig} onPress={onSubmit} />
+      <ButtonModal
+        text="Cambia la contraseña"
+        isLoadig={isLoadig}
+        onPress={onSubmit}
+      />
     </View>
   );
 };
 
-export default ChangePasswordForm;
+export default ChangePassword;
 
 const styles = StyleSheet.create({
   input: {
@@ -93,4 +136,4 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: "#00a680",
   },
-})
+});
