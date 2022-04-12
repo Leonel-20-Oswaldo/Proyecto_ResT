@@ -108,7 +108,7 @@ export default function RegisterForm(props) {
             />}
       />
       <Button
-      title='Únete'
+      title='Crear cuenta'
       containerStyle={styles.btnContainerRegister}
       buttonStyle={styles.btnRegister}
       onPress={onSubmit}
