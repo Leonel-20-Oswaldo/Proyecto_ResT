@@ -1,23 +1,27 @@
-import React, {useRef} from "react";
-import { StyleSheet, View, ScrollView, Text, Image } from "react-native";
+import React, {useRef} from 'react'
+import { StyleSheet, View, ScrollView, Text, Image } from 'react-native'
 import { Divider } from 'react-native-elements'
-import { useNavigation } from "@react-navigation/native";
-import LoginForm from "../../components/Account/LoginForm";
-import Toast from "react-native-toast-message";
+import { useNavigation } from '@react-navigation/native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import LoginForm from '../../components/Account/LoginForm'
+import Toast from 'react-native-toast-message'
 
 export default function Login(){
     const toastRef = useRef()
     return(
-        <ScrollView>
-            <Image source={require('../../../assets/img/restaurant.jpg')} resizeMode='contain' style={styles.logo}
-            />
-            <View style={styles.viewContainer}>
-                <LoginForm toastRef={toastRef}/>
-                <CreateAccount/>     
-            </View>
-            <Divider style={styles.Divider}/>
-            <Toast ref={toastRef}/>
-        </ScrollView>
+    <KeyboardAwareScrollView>
+        <Image
+            source={require('../../../assets/img/restaurant.jpg')}
+            resizeMode='contain'
+            style={styles.logo}
+        />
+        <View style={styles.viewContainer}>
+            <LoginForm toastRef={toastRef}/>
+            <CreateAccount/>
+        </View>
+        <Toast ref={toastRef}/>
+        <Divider style={styles}/>
+    </KeyboardAwareScrollView>
     )
 }
 
@@ -25,11 +29,12 @@ function CreateAccount(){
     const navigation = useNavigation()
     return(
         <Text style = {styles.textRegister}>
-            ¿Aun no tienes Cuneta? {' '}
-            <Text style ={styles.linkRegister}
-            onPress={()=>navigation.navigate('register')}
+            ¿Aún no tienes cuenta?{''}
+            <Text
+                style = {styles.linkRegister}
+                onPress={()=>navigation.navigate('register')}
             >
-            Sign up
+                Sign Up
             </Text>
         </Text>
     )
@@ -43,22 +48,19 @@ const styles = StyleSheet.create({
     },
     viewContainer:{
         marginRight: 40,
-        marginLeft: 40,
-        textAlign:'center'
+        marginLeft: 40
     },
-    Divider:{
-        backgroundColor:'#00a630',
+    divider:{
+        backgroundColor: '#00a680',
         margin: 40
     },
     textRegister:{
         marginTop: 15,
         marginLeft: 10,
-        marginRight: 10,
-        textAlign:'center'
+        marginRight: 10
     },
     linkRegister:{
-        color: '#00a600',
-        fontWeight: 'bold',
-        textAlign: 'justify'
+        color: '#00a680',
+        fontWeight: 'bold'
     }
 })

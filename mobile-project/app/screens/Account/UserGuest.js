@@ -1,7 +1,9 @@
-import React from "react";
-import { StyleSheet, View, Text, ScrollView, Image } from 'react-native'
-import { Button } from "react-native-elements";
-import { useNavigation} from '@react-navigation/native'
+import React from 'react'
+import {StyleSheet, View, Text, ScrollView, Image} from 'react-native'
+import { Button } from 'react-native-elements'
+import {useNavigation} from '@react-navigation/native'
+import Login from './Login'
+
 
 export default function UserGuest(){
     const navigation = useNavigation()
@@ -12,13 +14,15 @@ export default function UserGuest(){
                 source={require('../../../assets/img/user-guest.jpg')}
             />
             <Text style={styles.title}>Ingresa a tu perfil</Text>
-            <Text style={styles.description}>Busca y visualiza las mejores opciones en restaurantes de tu cuidad, no olvides rankear tus favoritos</Text>
+            <Text style={styles.description}>
+                Busca y visualiza los mejores restaurantes de tu ciudad, no olvides rankear tus favoritos
+                </Text>
             <View style={styles.viewBtn}>
                 <Button
-                    title='Ver tu perfil'
-                    buttonStyle={styles.btnStyle}
-                    containerStyle={styles.btnContainer}
-                    onPress={()=>navigation.navigate('login')}
+                title='Ver tu perfil'
+                buttonStyle={styles.btnStyle}
+                containerStyle={styles.btnContainer}
+                onPress={()=>navigation.navigate('login')}
                 />
             </View>
         </ScrollView>
@@ -30,28 +34,27 @@ const styles = StyleSheet.create({
         paddingTop: 10
     },
     stretch:{
-        width:'100%',
+        width: '100%',
         height: 300,
         resizeMode: 'contain',
-        marginBotton: 40
+        marginBottom: 40
     },
     title:{
-        fontWeight:'bold',
+        fontWeight: 'bold',
         fontSize: 19,
         marginBottom: 10,
-        textAlign:'center'
+        textAlign: 'center'
     },
     description:{
         marginBottom: 20,
         textAlign: 'center'
-
     },
     viewBtn:{
-        flex:1,
+        flex: 1,
         alignItems: 'center'
     },
     btnStyle:{
-        backgroundColor:'#00a680'
+        backgroundColor: '#00a680'
     },
     btnContainer:{
         width: '70%'
